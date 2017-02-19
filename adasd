@@ -1,0 +1,203 @@
+[1mdiff --git a/index.html b/index.html[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mindex 2421990..6594139[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -1,35 +1,35 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html>[m
+[31m-<head>[m
+[31m-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">[m
+[31m-    <link rel="stylesheet" type="text/css" href="style.css">[m
+[31m-  <title></title>[m
+[31m-</head>[m
+[31m-<body>[m
+[31m-  <div class="row">[m
+[31m-    <div class="col-md-6 col-md-offset-3">[m
+[31m-      <div class="page-header">[m
+[31m-        <h1>Spacebook</h1>[m
+[31m-      </div>[m
+[31m-[m
+[31m-      <div class="posts">[m
+[31m-      </div>[m
+[31m-[m
+[31m-      <form class="beer-form">[m
+[31m-        <h3>Add a New Post</h3>[m
+[31m-[m
+[31m-        <div class="form-group">[m
+[31m-          <input type="text" id="post-name" class="form-control" placeholder="Post Text">[m
+[31m-          </input>[m
+[31m-        </div>[m
+[31m-[m
+[31m-[m
+[31m-        <button type="button" class="btn btn-primary add-post">Post</button>[m
+[31m-      </form>[m
+[31m-      [m
+[31m-    </div>[m
+[31m-  </div>[m
+[31m-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>[m
+[31m-  <script src="main.js"></script>[m
+[31m-</body>[m
+[31m-</html>[m
+[32m+[m[32m<!DOCTYPE html>[m[41m[m
+[32m+[m[32m<html>[m[41m[m
+[32m+[m[32m<head>[m[41m[m
+[32m+[m[32m    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">[m[41m[m
+[32m+[m[32m    <link rel="stylesheet" type="text/css" href="style.css">[m[41m[m
+[32m+[m[32m  <title></title>[m[41m[m
+[32m+[m[32m</head>[m[41m[m
+[32m+[m[32m<body>[m[41m[m
+[32m+[m[32m  <div class="row">[m[41m[m
+[32m+[m[32m    <div class="col-md-6 col-md-offset-3">[m[41m[m
+[32m+[m[32m      <div class="page-header">[m[41m[m
+[32m+[m[32m        <h1>Spacebook</h1>[m[41m[m
+[32m+[m[32m      </div>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m      <div class="posts">[m[41m[m
+[32m+[m[32m      </div>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m      <form class="beer-form">[m[41m[m
+[32m+[m[32m        <h3>Add a New Post</h3>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        <div class="form-group">[m[41m[m
+[32m+[m[32m          <input type="text" id="post-name" class="form-control" placeholder="Post Text">[m[41m[m
+[32m+[m[32m          </input>[m[41m[m
+[32m+[m[32m        </div>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        <button type="button" class="btn btn-primary add-post">Post</button>[m[41m[m
+[32m+[m[32m      </form>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    </div>[m[41m[m
+[32m+[m[32m  </div>[m[41m[m
+[32m+[m[32m  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>[m[41m[m
+[32m+[m[32m  <script src="main.js"></script>[m[41m[m
+[32m+[m[32m</body>[m[41m[m
+[32m+[m[32m</html>[m[41m[m
+[1mdiff --git a/main.js b/main.js[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mindex 8be2eb5..9c0f834[m
+[1m--- a/main.js[m
+[1m+++ b/main.js[m
+[36m@@ -1,37 +1,67 @@[m
+[31m-var posts = [];[m
+[31m-var currentId = 1;[m
+[31m-[m
+[31m-var addPost = function(textinput) {[m
+[31m-  var post = {text: textinput, id: currentId};[m
+[31m-  currentId++;[m
+[31m-  posts.push(post);[m
+[31m-  console.log(posts);[m
+[31m-};[m
+[31m-[m
+[31m-var updatePosts = function() {[m
+[31m-  $(".posts").empty();[m
+[31m-  for (var i = 0; i < posts.length; i++) {[m
+[31m-    $(".posts").append("<p class = 'post' data-id = " +(posts[i].id) + ">" + "<a href = '#' class = 'remove'>" + "Remove </a>" + posts[i].text + "</p>");[m
+[31m-  }[m
+[31m-};[m
+[31m-[m
+[31m-var postHandler = function() {[m
+[31m-  var text = $("#post-name").val();[m
+[31m-  $(".add-post").on("click", addPost(text));[m
+[31m-  updatePosts();[m
+[31m-};[m
+[31m-[m
+[31m-var removeHandler = function() {[m
+[31m-  var currentCommentId = $(this).parent().data().id;[m
+[31m-  for(var i = 0; i < posts.length; i++) {[m
+[31m-    if(posts[i].id === currentCommentId) {[m
+[31m-      posts.splice(i, 1);[m
+[31m-      break;[m
+[31m-    }[m
+[31m-}[m
+[31m-  $(this).parent().remove();[m
+[31m-//  $(".post[data-id=" + currentCommentId + "]").remove();[m
+[32m+[m[32mvar posts = [];[m[41m[m
+[32m+[m[32mvar currentPostId = 1;[m[41m[m
+[32m+[m[32mvar currentCommentId = 1;[m[41m[m
+[32m+[m[32mvar currentButtonId = 1;[m[41m[m
+[32m+[m[32mvar test = 10;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mvar addPost = function(textinput){[m[41m[m
+[32m+[m[32m  var post = {text: textinput, id: currentPostId, comments : []};[m[41m[m
+[32m+[m[32m  currentPostId++;[m[41m[m
+[32m+[m[32m  posts.push(post);[m[41m[m
+[32m+[m[32m};[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m/*var addComment = function(textinput) {[m[41m[m
+[32m+[m[32m  var comment = {text: textinput, id: currentPostId};[m[41m[m
+[32m+[m[32m  currentCommentId++;[m[41m[m
+[32m+[m[32m  comments.push(comment);[m[41m[m
+[32m+[m[32m};[m[41m[m
+[32m+[m[32m*/[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mvar updatePosts = function() {[m[41m[m
+[32m+[m[32m  $(".posts").empty();[m[41m[m
+[32m+[m[32m  for (var i = 0; i < posts.length; i++) {[m[41m[m
+[32m+[m[32m    var currentPostId = posts[i].id;[m[41m[m
+[32m+[m[32m    $(".posts").append("<p class = 'post' data-id = " +(posts[i].id) + ">" + "<a href = '#' class = 'remove'>" +[m[41m[m
+[32m+[m[32m      "Remove </a>" + posts[i].text + "</p>");[m
+[32m+[m[32m      for (var j = 0 ; j < posts[i].comments.length; j++) {[m
+[32m+[m[32m        alert("hi");[m
+[32m+[m[32m      }[m[41m[m
+[32m+[m[32m    $(".posts").append("<h5> Username: " + '<input type="text" id='+ (i+1)*posts[i].id+' placeholder = "Who are you?"> Comment: ' + '<input type="text" data-id='+posts[i].id+' placeholder = "Write a comment..."/> </h5>');[m[41m[m
+[32m+[m[32m    $(".posts").append("<button class='btn btn-primary add-comment' onclick = 'commentHandler(currentPostId)' data-id = "+[m[41m[m
+[32m+[m[32m    (posts[i].id) +"' type='button'> Comment </button>");[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m};[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mvar postHandler = function() {[m[41m[m
+[32m+[m[32m  var text = $("#post-name").val();[m[41m[m
+[32m+[m[32m  $(".add-post").on("click", addPost(text));[m[41m[m
+[32m+[m[32m  updatePosts();[m[41m[m
+[32m+[m[32m};[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mvar removeHandler = function() {[m[41m[m
+[32m+[m[32m  var currentPostId = $(this).parent().data().id;[m[41m[m
+[32m+[m[32m  for(var i = 0; i < posts.length; i++) {[m[41m[m
+[32m+[m[32m    if(posts[i].id === currentPostId) {[m[41m[m
+[32m+[m[32m      posts.splice(i, 1);[m[41m[m
+[32m+[m[32m      break;[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[32m  $(this).parent().remove();[m[41m[m
+[32m+[m[32m//  $(".post[data-id=" + currentCommentId + "]").remove();[m[41m[m
+[32m+[m[32m//var x = 5;[m[41m[m
+ };[m
+ [m
+[31m-$(".add-post").on("click", postHandler);[m
+[31m-$(".posts").on("click", "a", removeHandler);[m
+[32m+[m[32mcommentHandler = function(commentNum) {[m[41m[m
+[32m+[m[32m  commentNum -= 1;[m[41m[m
+[32m+[m[32m  console.log(commentNum);[m[41m[m
+[32m+[m[32m  //var username = $('#'+ 31).val();[m[41m[m
+[32m+[m[32m  //console.log(username);[m[41m[m
+[32m+[m[32m//  var text = $("post-name").val();[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m//  $('p[data-id='+currentCommentId+']').after(" " + test);[m[41m[m
+[32m+[m[32m//  currentCommentId++;[m[41m[m
+[32m+[m[32m//  test++;[m[41m[m
+[32m+[m[32m};[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m$(".add-post").on("click", postHandler);[m[41m[m
+[32m+[m[32m$(".posts").on("click", "a", removeHandler);[m[41m[m
+[1mdiff --git a/style.css b/style.css[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mindex d19fc11..ffce56e[m
+[1m--- a/style.css[m
+[1m+++ b/style.css[m
+[36m@@ -1,3 +1,7 @@[m
+[31m-p {[m
+[31m-    font-family: cursive;[m
+[31m-}[m
+[32m+[m[32mp {[m[41m[m
+[32m+[m[32m    font-family: cursive;[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m.posts {[m[41m[m
+[32m+[m[32m  margin-bottom: 20px;[m[41m[m
+[32m+[m[32m}[m[41m[m
